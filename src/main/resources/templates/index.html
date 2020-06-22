@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fimeco Surveys</title>
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<form action="#" method="post">
+		<h2 th:text="#{form.index.menu.title}"></h2>
+		
+		<div th:if="${showMessage}">
+			<h3> Thanks for take the survey!!!!!!!! </h3>
+		</div>
+		<h3>
+			<a th:href="@{/show-survey}" th:text="#{form.index.take.survey}"></a>
+		</h3>
+
+	</form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fimeco Surveys</title>
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<form action="#" th:action="@{/submitData}" th:object="${surveyData}" method="post">
+		<h2 th:text="#{form.show.survey.title}"></h2>
+		<div>
+			<div>
+				<h4>UserName:</h4>
+				<textarea th:field="*{user.name}" rows="1" cols="60" maxlength="10" required ></textarea>
+				<span th:if="${#fields.hasErrors('user.name')}" th:errors="*{user.name}" class="validation-error"></span>
+				
+				<h4>Email:</h4>
+				<textarea th:field="*{user.email}" rows="1" cols="60" required ></textarea>
+				<span th:if="${#fields.hasErrors('user.email')}" th:errors="*{user.email}" class="validation-error"></span>
+				
+			</div>
+			<table id="tableResult">
+				<tr th:each="question,stat : *{questionList}">
+					<td>
+						<h4 th:text="${stat.index}+1+'.   '+${question.text}+'?'"> </h4>
+						<input th:field="*{questionList[__${stat.index}__].id}" type="hidden" />
+						<input th:field="*{questionList[__${stat.index}__].text}" type="hidden" />
+						<input th:field="*{questionList[__${stat.index}__].points}" type="hidden" />
+						<input th:field="*{questionList[__${stat.index}__].active}" type="hidden" />
+						<textarea th:field="*{questionList[__${stat.index}__].userResponse}"
+							rows="3" cols="60" required ></textarea>
+						<span 
+							th:if="${#fields.hasErrors('questionList[__${stat.index}__].userResponse')}"
+							th:errors="*{questionList[__${stat.index}__].userResponse}"
+							class="validation-error"></span>
+							
+						<span th:text="${question.points} + ' points'"></span>
+
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value=" Send Survey " id="submit" class="large-button-ok">
+		</div>
+	</form>
+</body>
+</html>
